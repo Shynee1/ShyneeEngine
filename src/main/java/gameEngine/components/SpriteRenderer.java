@@ -1,11 +1,15 @@
 package gameEngine.components;
 
+import gameEngine.ImGuiLayer;
 import gameEngine.Transform;
 import gameEngine.abstracts.Component;
 import gameEngine.renderer.Texture;
 import gameEngine.sprites.Sprite;
+import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+
+import java.sql.SQLOutput;
 
 public class SpriteRenderer extends Component {
 
@@ -40,6 +44,11 @@ public class SpriteRenderer extends Component {
             this.gameObject.transform.copy(lastT);
             this.isDirty = true;
         }
+    }
+
+    @Override
+    public void imgui(){
+
     }
 
     public Texture getTexture(){
