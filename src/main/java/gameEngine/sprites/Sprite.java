@@ -5,22 +5,22 @@ import org.joml.Vector2f;
 
 public class Sprite {
 
-    private Texture texture;
-    private Vector2f[] texCoords;
-
-    public Sprite(Texture texture){
-        this.texture = texture;
-        this.texCoords = new Vector2f[]{
-                new Vector2f(1, 1),
+    private Texture texture = null;
+    private Vector2f[] texCoords = new Vector2f[]{
+        new Vector2f(1, 1),
                 new Vector2f(1, 0),
                 new Vector2f(0, 0),
                 new Vector2f(0, 1)
-        };
+    };
+
+    public Sprite setTexture(Texture texture){
+        this.texture = texture;
+        return this;
     }
 
-    public Sprite(Texture texture, Vector2f[] texCoords) {
-        this.texture = texture;
+    public Sprite setTexCoords(Vector2f[] texCoords){
         this.texCoords = texCoords;
+        return this;
     }
 
     public Texture getTexture() {

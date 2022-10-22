@@ -16,6 +16,9 @@ import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
+/**
+ * RenderBatch is a collection of sprites with the same zIndex that can be rendered
+ */
 public class RenderBatch implements Comparable<RenderBatch>{
 
     //Pos               Color                           tex coords          tex id
@@ -251,7 +254,12 @@ public class RenderBatch implements Comparable<RenderBatch>{
         return this.zIndex;
     }
 
-    //Compare zIndex of this and another Renderbatch
+    /**
+     * Compares zIndex of current batch to another RenderBatch
+     *
+     * @param o the object to be compared.
+     * @return int
+     */
     @Override
     public int compareTo(RenderBatch o) {
         return Integer.compare(this.zIndex, o.getZIndex());

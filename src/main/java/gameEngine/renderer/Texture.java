@@ -17,8 +17,7 @@ public class Texture {
     private int width;
     private int height;
 
-    public Texture(BufferedImage image){
-
+    public void create(BufferedImage image){
         if (image == null) assert false : "Error: (Texture) BufferedImage is null";
 
         init();
@@ -36,8 +35,8 @@ public class Texture {
 
         uploadToGPU(byteBuffer, image.getWidth(), image.getHeight(), channelAmount);
     }
-    public Texture(String filepath) {
 
+    public Texture create(String filepath){
         init();
 
         //Convert image to ByteBuffer
@@ -51,6 +50,8 @@ public class Texture {
 
         //Free storage used by stbi
         stbi_image_free(image);
+
+        return this;
     }
 
     private void init(){

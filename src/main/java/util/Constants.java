@@ -9,4 +9,7 @@ public class Constants {
     public final static float ORTHO_SCREEN_RIGHT = TILE_SIZE*SCREEN_TILE_WIDTH;
     public final static float ORTHO_SCREEN_TOP = TILE_SIZE*SCREEN_TILE_HEIGHT;
 
+    //Scenes
+    public final static String saveFileName = "level.json";
+
 }
