@@ -1,15 +1,11 @@
 package gameEngine.components;
 
-import gameEngine.ImGuiLayer;
 import gameEngine.Transform;
 import gameEngine.abstracts.Component;
 import gameEngine.renderer.Texture;
 import gameEngine.sprites.Sprite;
-import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-
-import java.sql.SQLOutput;
 
 public class SpriteRenderer extends Component {
 
@@ -75,6 +71,11 @@ public class SpriteRenderer extends Component {
         }
     }
 
+
+    public void setTexture(Texture texture){
+        this.sprite = new Sprite(texture);
+        isDirty = true;
+    }
     public boolean isDirty(){
         return this.isDirty;
     }

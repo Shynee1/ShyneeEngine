@@ -1,15 +1,13 @@
 package scenes;
 
+import gameEngine.Transform;
+import gameEngine.abstracts.Scene;
 import gameEngine.components.SpriteRenderer;
 import gameEngine.objects.Camera;
 import gameEngine.objects.GameObject;
-import gameEngine.abstracts.Scene;
-import gameEngine.Transform;
 import gameEngine.sprites.Spritesheet;
 import gameEngine.util.AssetPool;
-import imgui.ImGui;
 import org.joml.Vector2f;
-import org.joml.Vector4f;
 
 public class LevelEditorScene extends Scene {
 
@@ -25,7 +23,7 @@ public class LevelEditorScene extends Scene {
         spritesheet = AssetPool.getSpriteSheet("assets/spritesheets/spritesheet.png");
 
         obj1 = new GameObject("obj1", new Transform(new Vector2f(0, 100), new Vector2f(256, 256)), 1);
-        obj1.addComponent(new SpriteRenderer(new Vector4f(1, 0, 0, 1)));
+        obj1.addComponent(new SpriteRenderer(spritesheet.getSprite(0)));
         this.addGameObject(obj1);
 
         obj2 = new GameObject("obj2", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), -1);
