@@ -2,11 +2,10 @@ package gameEngine.listeners;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+/**
+ * Mouse listener singleton with GLFW position and scroll callbacks
+ */
 public class MouseListener {
-
-    /*
-     Mouse listener singleton with GLFW position and scroll callbacks
-    */
 
     private static MouseListener instance;
     private double scrollX, scrollY;

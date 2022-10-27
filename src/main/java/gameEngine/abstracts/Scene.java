@@ -58,6 +58,9 @@ public abstract class Scene {
         return this.camera;
     }
 
+    /**
+     * Creates ImGui window for each scene. Calls on GameObject to fill window
+     */
     public void sceneImgui(){
         if (activeGameObject != null){
             ImGui.begin("Inspector");
@@ -79,7 +82,7 @@ public abstract class Scene {
                 .create();
 
         try {
-            FileWriter writer = new FileWriter("level.json");
+            FileWriter writer = new FileWriter(Constants.saveFileName);
             writer.write(gson.toJson(this.gameObjects));
             writer.close();
         } catch (IOException e) {

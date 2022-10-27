@@ -11,7 +11,9 @@ import imgui.enums.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -30,7 +32,7 @@ public class ImGuiLayer {
     // LWJGL3 renderer (SHOULD be initialized)
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
-    public static List<ImFont> fonts = new ArrayList<>();
+    public static HashMap<String, ImFont> fonts = new HashMap<>();
 
     public ImGuiLayer(long window){
         this.window = window;
@@ -165,8 +167,9 @@ public class ImGuiLayer {
         for (int i = assetsFonts.length-1; i >= 0; i--){
             if (!(assetsFonts[i].isFile() && assetsFonts[i].getPath().toLowerCase().contains(".ttf"))) continue;
 
-            fonts.add(fontAtlas.addFontFromFileTTF(assetsFonts[i].getPath(), 15, fontConfig));
+            fonts.put(assetsFonts[i].getPath().replace('\\', '/'), fontAtlas.addFontFromFileTTF(assetsFonts[i].getPath(), 15, fontConfig));
             usedFont = true;
+
         }
 
         if (!usedFont) assert false : "No fonts of filetype '.ttf' were found in fonts folder";

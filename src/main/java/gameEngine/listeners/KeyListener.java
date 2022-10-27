@@ -2,11 +2,10 @@ package gameEngine.listeners;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+/**
+ * Key listener singleton with GLFW key callback
+ */
 public class KeyListener {
-
-    /*
-     Key listener singleton with GLFW key callback
-    */
 
     private static KeyListener instance;
     private boolean[] keyPressed = new boolean[GLFW_KEY_LAST];

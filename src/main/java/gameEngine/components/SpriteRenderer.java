@@ -9,6 +9,9 @@ import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+/**
+ * Responsible for attaching sprites/textures to GameObjects
+ */
 public class SpriteRenderer extends Component {
 
     private Vector4f color = new Vector4f(1, 1, 1, 1);
@@ -16,25 +19,6 @@ public class SpriteRenderer extends Component {
 
     private transient Transform lastT;
     private transient boolean isDirty = true;
-
-    /*
-    public SpriteRenderer(Vector4f color) {
-        this.color = color;
-        this.sprite = new Sprite(null);
-    }
-
-    public SpriteRenderer(Texture texture){
-        this.sprite = new Sprite(texture);
-        this.color = new Vector4f(1, 1, 1, 1);
-    }
-
-
-    public SpriteRenderer(Sprite sprite){
-        this.sprite = sprite;
-        this.color = new Vector4f(1, 1, 1, 1);
-    }
-
-     */
 
     @Override
     public void start() {
@@ -52,8 +36,7 @@ public class SpriteRenderer extends Component {
     @Override
     public void imgui(){
         float[] imColor = {color.x, color.y, color.z, color.w};
-
-        ImGui.pushFont(ImGuiLayer.fonts.get(ImGuiLayer.fonts.size()-1));
+        ImGui.pushFont(ImGuiLayer.fonts.get("assets/fonts/ARLRDBD.TTF"));
         ImGui.text("Color Picker:");
         if (ImGui.colorPicker4("Color Picker", imColor)) {
             this.color.set(imColor[0], imColor[1], imColor[2], imColor[3]);

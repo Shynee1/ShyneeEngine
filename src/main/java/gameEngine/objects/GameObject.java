@@ -13,6 +13,10 @@ public class GameObject {
     private int zIndex;
     public Transform transform;
 
+    /**
+     * Creates a simple GameObject with default values
+     * @param name The name of the GameObject
+     */
     public GameObject(String name) {
         this.name = name;
         this.components = new ArrayList<>();
@@ -20,6 +24,12 @@ public class GameObject {
         this.zIndex = 0;
     }
 
+    /**
+     * Creates a GameObject with the parameters
+     * @param name The name of the GameObject
+     * @param transform Custom class that includes position and scale
+     * @param zIndex Integer that decides depth of GameObjects
+     */
     public GameObject(String name, Transform transform, int zIndex) {
         this.name = name;
         this.components = new ArrayList<>();
@@ -27,6 +37,12 @@ public class GameObject {
         this.zIndex = zIndex;
     }
 
+    /**
+     * Gets a component that is attached to the GameObject
+     * @param componentClass Generic class of the component you want to get
+     * @return Returns the component or null
+     * @param <T> Generic value that extends Component
+     */
     public <T extends Component> T getComponent(Class<T> componentClass) {
         for (Component c : components) {
             if (componentClass.isAssignableFrom(c.getClass())) {
@@ -42,6 +58,11 @@ public class GameObject {
         return null;
     }
 
+    /**
+     * Removes a component from the GameObject
+     * @param componentClass Generic class of the component you want to get
+     * @param <T> Generic value that extends Component
+     */
     public <T extends Component> void removeComponent(Class<T> componentClass) {
         for (int i=0; i < components.size(); i++) {
             Component c = components.get(i);
@@ -69,6 +90,9 @@ public class GameObject {
         }
     }
 
+    /**
+     * Adds every component's ImGui widget to the main Scene window
+     */
     public void imgui(){
         for (Component c : components){
             c.imgui();

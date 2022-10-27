@@ -14,11 +14,10 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+/**
+ * Creates a simple LWJGL window as a singleton.
+ */
 public class Window {
-
-    /*
-     Creates a simple LWJGL window as a singleton. Use create() to initialize variables and start the loop.
-    */
 
     private static Window window = null;
     private static Scene currentScene;
@@ -45,16 +44,13 @@ public class Window {
 
     public static void changeScene(int newScene){
         switch (newScene){
-            case 0 -> {
-                currentScene = new LevelEditorScene();
-            }
-            case 1 -> {
-                currentScene = new LevelScene();
-            }
+            case 0 -> currentScene = new LevelEditorScene();
+            case 1 -> currentScene = new LevelScene();
             default -> {
                 assert false : "Unknown scene '" + newScene + "'";
             }
         }
+        currentScene.load();
         currentScene.init();
         currentScene.start();
     }
@@ -144,7 +140,7 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
-        currentScene.load();
+
         while(!glfwWindowShouldClose(glfwWindow)){
             //Poll events
             glfwPollEvents();
