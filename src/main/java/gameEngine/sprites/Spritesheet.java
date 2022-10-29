@@ -30,7 +30,10 @@ public class Spritesheet {
                     new Vector2f(leftX, topY)
             };
 
-            Sprite sprite = new Sprite().setTexture(this.sheet).setTexCoords(texCoords);
+            Sprite sprite = new Sprite().setTexture(this.sheet);
+            sprite.setWidth(spriteWidth);
+            sprite.setHeight(spriteHeight);
+            sprite.setTexCoords(texCoords);
             this.sprites.add(sprite);
 
             currentX += spriteWidth+spacing;
@@ -43,5 +46,9 @@ public class Spritesheet {
 
     public Sprite getSprite(int index){
         return this.sprites.get(index);
+    }
+
+    public int size(){
+        return sprites.size();
     }
 }

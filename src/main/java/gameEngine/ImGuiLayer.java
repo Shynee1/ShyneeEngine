@@ -1,6 +1,8 @@
 package gameEngine;
 
 import gameEngine.abstracts.Scene;
+import gameEngine.listeners.KeyListener;
+import gameEngine.listeners.MouseListener;
 import imgui.*;
 import imgui.callbacks.ImStrConsumer;
 import imgui.callbacks.ImStrSupplier;
@@ -18,11 +20,10 @@ import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+/**
+ * Basic ImGui demo layer copied directly from GitHub: https://github.com/spair/imgui-java/blob/v1.76-0.9/imgui-lwjgl3/src/test/java/ImGuiGlfwExample.java#L279
+ */
 public class ImGuiLayer {
-
-    /*
-        Basic ImGui demo layer copied directly from GitHub: https://github.com/spair/imgui-java/blob/v1.76-0.9/imgui-lwjgl3/src/test/java/ImGuiGlfwExample.java#L279
-     */
 
     private long window;
 
@@ -103,6 +104,8 @@ public class ImGuiLayer {
             io.setKeyShift(io.getKeysDown(GLFW_KEY_LEFT_SHIFT) || io.getKeysDown(GLFW_KEY_RIGHT_SHIFT));
             io.setKeyAlt(io.getKeysDown(GLFW_KEY_LEFT_ALT) || io.getKeysDown(GLFW_KEY_RIGHT_ALT));
             io.setKeySuper(io.getKeysDown(GLFW_KEY_LEFT_SUPER) || io.getKeysDown(GLFW_KEY_RIGHT_SUPER));
+
+            if (!io.getWantCaptureKeyboard()) KeyListener.keyCallback(w, key, scancode, action, mods);
         });
 
         //Handle special character input
@@ -126,6 +129,10 @@ public class ImGuiLayer {
 
             if (!io.getWantCaptureMouse() && mouseDown[1]) {
                 ImGui.setWindowFocus(null);
+            }
+
+            if (!io.getWantCaptureMouse()) {
+                MouseListener.mouseButtonCallback(window, button, action, mods);
             }
         });
 
@@ -193,7 +200,6 @@ public class ImGuiLayer {
 
         ImGui.newFrame();
         currentScene.sceneImgui();
-        ImGui.showDemoWindow();
         ImGui.render();
 
         endFrame();
