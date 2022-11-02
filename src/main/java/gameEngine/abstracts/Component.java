@@ -9,6 +9,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public abstract class Component {
+    //Global
+    private static int ID_COUNTER = 0;
+    //Unique to each object
+    private int uid = -1;
+
     public transient GameObject gameObject = null;
 
     public void start(){
@@ -72,5 +77,19 @@ public abstract class Component {
             e.printStackTrace();
         }
 
+    }
+
+    public void generateId(){
+        if (uid == -1){
+            this.uid = Component.ID_COUNTER++;
+        }
+    }
+
+    public int getUid(){
+        return this.uid;
+    }
+
+    public static void init(int maxId){
+        Component.ID_COUNTER = maxId;
     }
 }

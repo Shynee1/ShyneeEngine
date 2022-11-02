@@ -2,11 +2,17 @@ package gameEngine.objects;
 
 import gameEngine.Transform;
 import gameEngine.abstracts.Component;
+import gameEngine.serialization.GameObjectSerialization;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
+
+    //Global
+    private static int ID_COUNTER = 0;
+    //Unique to each GameObject
+    private int uid = -1;
 
     private String name;
     private List<Component> components;
@@ -22,6 +28,8 @@ public class GameObject {
         this.components = new ArrayList<>();
         this.transform = new Transform();
         this.zIndex = 0;
+
+        this.uid = GameObject.ID_COUNTER++;
     }
 
     /**
@@ -35,6 +43,8 @@ public class GameObject {
         this.components = new ArrayList<>();
         this.transform = transform;
         this.zIndex = zIndex;
+
+        this.uid = GameObject.ID_COUNTER++;
     }
 
     /**
@@ -75,6 +85,7 @@ public class GameObject {
 
     public void addComponent(Component c) {
         this.components.add(c);
+        c.generateId();
         c.gameObject = this;
     }
 
@@ -101,5 +112,17 @@ public class GameObject {
 
     public int getZIndex(){
         return this.zIndex;
+    }
+
+    public int getUid(){
+        return uid;
+    }
+
+    public static void init(int maxID){
+        GameObject.ID_COUNTER = maxID;
+    }
+
+    public List<Component> getAllComponents(){
+        return this.components;
     }
 }

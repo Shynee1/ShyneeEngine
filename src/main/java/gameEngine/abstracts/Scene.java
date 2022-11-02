@@ -10,6 +10,7 @@ import gameEngine.serialization.GameObjectSerialization;
 import imgui.ImGui;
 import util.Constants;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -82,7 +83,7 @@ public abstract class Scene {
                 .create();
 
         try {
-            FileWriter writer = new FileWriter(Constants.saveFileName);
+            FileWriter writer = new FileWriter(Constants.saveFileName, false);
             writer.write(gson.toJson(this.gameObjects));
             writer.close();
         } catch (IOException e) {
@@ -100,19 +101,39 @@ public abstract class Scene {
                 .registerTypeAdapter(GameObject.class, new GameObjectSerialization())
                 .create();
 
+        File file = new File(Constants.saveFileName);
         String inFile = "";
 
+        if (!file.exists()) return;
+
         try {
-            inFile = new String(Files.readAllBytes(Paths.get(Constants.saveFileName)));
+            inFile = new String(Files.readAllBytes(file.toPath()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         if (!inFile.equals("")){
+            int maxGoId = -1;
+            int maxCompId = -1;
+
             GameObject[] objs = gson.fromJson(inFile, GameObject[].class);
             for (GameObject go : objs){
                 this.addGameObject(go);
+
+                for (Component c : go.getAllComponents()){
+                    if (c.getUid() > maxCompId){
+                        maxCompId = c.getUid();
+                    }
+                }
+
+                if (go.getUid() > maxGoId){
+                    maxGoId = go.getUid();
+                }
             }
+
+            //Sets max id counter to one higher than value loaded from save file
+            GameObject.init(++maxGoId);
+            Component.init(++maxCompId);
 
             this.levelLoaded = true;
         }
