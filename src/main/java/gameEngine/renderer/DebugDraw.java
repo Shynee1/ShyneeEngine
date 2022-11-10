@@ -15,12 +15,14 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 public class DebugDraw {
-    private static int MAX_LINES = 500;
+
+    private static final int MAX_LINES = 500;
+
+    //6 floats per vertex, 2 vertices per line
+    private static final float[] vertexArray = new float[MAX_LINES*6*2];
+    private static final Shader shader = AssetPool.getShader("assets/shaders/debugLine.glsl");
 
     private static List<Line2D> lines = new ArrayList<>();
-    //6 floats per vertex, 2 vertices per line
-    private static float[] vertexArray = new float[MAX_LINES*6*2];
-    private static Shader shader = AssetPool.getShader("assets/shaders/debugLine.glsl");
 
     private static int vaoId;
     private static int vboId;
@@ -35,7 +37,7 @@ public class DebugDraw {
         //Generate vbo and free memory
         vboId = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboId);
-        glBufferData(GL_ARRAY_BUFFER, vertexArray.length * Float.BYTES, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, (long) vertexArray.length * Float.BYTES, GL_DYNAMIC_DRAW);
 
         //Enable vertex array attributes
         //[x,y,z, r,g,b]
@@ -45,7 +47,7 @@ public class DebugDraw {
         glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * Float.BYTES, 3 * Float.BYTES);
         glEnableVertexAttribArray(1);
 
-        glLineWidth(4.0f);
+        glLineWidth(2.0f);
     }
 
     public static void beginFrame(){

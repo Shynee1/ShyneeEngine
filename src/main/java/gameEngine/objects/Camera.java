@@ -54,4 +54,8 @@ public class Camera {
     public Matrix4f getInverseView() {
         return inverseView;
     }
+
+    public Vector2f getProjectionSize(){
+        return projectionSize;
+    }
 }

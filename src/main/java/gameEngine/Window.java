@@ -51,7 +51,7 @@ public class Window {
                 assert false : "Unknown scene '" + newScene + "'";
             }
         }
-        //currentScene.load();
+        currentScene.load();
         currentScene.init();
         currentScene.start();
     }

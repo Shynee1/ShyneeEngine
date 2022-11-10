@@ -34,7 +34,7 @@ void main(){
     if (fTexId > 0){
         int id = int(fTexId);
         //(1, 1, 1, 1) * (v1, v2, v3, v4) = (v1, v2, v3, v4)
-        color = fColor*texture(uTextures[id], fTexCoords);
+        color = fColor * texture(uTextures[id], fTexCoords);
     } else {
         color = fColor;
     }
