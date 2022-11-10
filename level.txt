@@ -1,6 +1,62 @@
 [
   {
     "uid": 0,
+    "name": "obj3",
+    "components": [
+      {
+        "type": "gameEngine.components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "textureID": 2,
+              "width": 112,
+              "height": 192
+            },
+            "texCoords": [
+              {
+                "x": 0.14285715,
+                "y": 1.0
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.0,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 0
+        }
+      }
+    ],
+    "zIndex": 0,
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "scale": {
+        "x": 256.0,
+        "y": 256.0
+      }
+    }
+  },
+  {
+    "uid": 1,
     "name": "obj1",
     "components": [
       {
@@ -34,7 +90,7 @@
               }
             ]
           },
-          "uid": 0
+          "uid": 1
         }
       },
       {
@@ -47,7 +103,7 @@
             "y": 0.5,
             "z": 0.0
           },
-          "uid": 1
+          "uid": 2
         }
       }
     ],
@@ -64,7 +120,7 @@
     }
   },
   {
-    "uid": 1,
+    "uid": 2,
     "name": "obj2",
     "components": [
       {
@@ -103,7 +159,7 @@
               }
             ]
           },
-          "uid": 2
+          "uid": 3
         }
       }
     ],
@@ -116,6 +172,62 @@
       "scale": {
         "x": 256.0,
         "y": 256.0
+      }
+    }
+  },
+  {
+    "uid": 3,
+    "name": "SpriteGenObject",
+    "components": [
+      {
+        "type": "gameEngine.components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "textureID": 2,
+              "width": 112,
+              "height": 192
+            },
+            "texCoords": [
+              {
+                "x": 0.14285715,
+                "y": 1.0
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.0,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 4
+        }
+      }
+    ],
+    "zIndex": 0,
+    "transform": {
+      "position": {
+        "x": 133.0,
+        "y": 404.00003
+      },
+      "scale": {
+        "x": 32.0,
+        "y": 32.0
       }
     }
   }

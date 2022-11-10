@@ -3,6 +3,7 @@ package gameEngine;
 import gameEngine.abstracts.Scene;
 import gameEngine.listeners.KeyListener;
 import gameEngine.listeners.MouseListener;
+import gameEngine.renderer.DebugDraw;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -50,7 +51,7 @@ public class Window {
                 assert false : "Unknown scene '" + newScene + "'";
             }
         }
-        currentScene.load();
+        //currentScene.load();
         currentScene.init();
         currentScene.start();
     }
@@ -145,10 +146,15 @@ public class Window {
             //Poll events
             glfwPollEvents();
 
+            DebugDraw.beginFrame();
+
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (dt>=0) currentScene.update(dt);
+            if (dt>=0) {
+                DebugDraw.draw();
+                currentScene.update(dt);
+            }
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);

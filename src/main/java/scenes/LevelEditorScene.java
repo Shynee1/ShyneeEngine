@@ -8,6 +8,7 @@ import gameEngine.components.Rigidbody;
 import gameEngine.components.SpriteRenderer;
 import gameEngine.objects.Camera;
 import gameEngine.objects.GameObject;
+import gameEngine.renderer.DebugDraw;
 import gameEngine.sprites.Sprite;
 import gameEngine.sprites.Spritesheet;
 import gameEngine.util.AssetPool;
@@ -15,12 +16,14 @@ import gameEngine.util.Prefabs;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 public class LevelEditorScene extends Scene {
 
     private GameObject obj1;
     private GameObject obj2;
+    private GameObject obj3;
     private Spritesheet spritesheet;
 
     private final MouseControls mc = new MouseControls();
@@ -28,13 +31,19 @@ public class LevelEditorScene extends Scene {
     @Override
     public void init() {
         loadResources();
-        spritesheet = AssetPool.getSpriteSheet("assets/spritesheets/blocks.png");
-        this.camera = new Camera(new Vector2f(-250, 0));
+        spritesheet = AssetPool.getSpritesheet("assets/spritesheets/blocks.png");
+        this.camera = new Camera(new Vector2f(0, 0));
+
+        DebugDraw.addLine2D(new Vector2f(0, 100), new Vector2f(300, 300), new Vector3f (0, 1, 0), 1000000000);
+
+        obj3 = new GameObject("obj3", new Transform(new Vector2f(0, 0), new Vector2f(256, 256)), 0);
+        obj3.addComponent(new SpriteRenderer().setSprite(spritesheet.getSprite(0)));
+        this.addGameObject(obj3);
+
         if (levelLoaded){
             this.activeGameObject = gameObjects.get(0);
             return;
         }
-
 
         obj1 = new GameObject("obj1", new Transform(new Vector2f(0, 100), new Vector2f(256, 256)), 0);
         obj1.addComponent(new SpriteRenderer().setColor(new Vector4f(1, 0, 0, 1)));
@@ -44,6 +53,8 @@ public class LevelEditorScene extends Scene {
         obj2 = new GameObject("obj2", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), 1);
         obj2.addComponent(new SpriteRenderer().setTexture(AssetPool.getTexture("assets/testImages/blendImage2.png")));
         this.addGameObject(obj2);
+
+
 
     }
 
@@ -91,7 +102,7 @@ public class LevelEditorScene extends Scene {
             Vector2f[] texCoords = sprite.getTexCoords();
 
             ImGui.pushID(i);
-            if (ImGui.imageButton(sId, sWidth, sHeight, texCoords[0].x, texCoords[0].y, texCoords[2].x, texCoords[2].y)){
+            if (ImGui.imageButton(sId, sWidth, sHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)){
                 GameObject obj = Prefabs.generateSpriteObject(sprite, sWidth, sHeight);
                 //Attach to the mouse cursor
                 mc.pickup(obj);

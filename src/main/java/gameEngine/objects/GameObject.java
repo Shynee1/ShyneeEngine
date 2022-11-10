@@ -2,7 +2,6 @@ package gameEngine.objects;
 
 import gameEngine.Transform;
 import gameEngine.abstracts.Component;
-import gameEngine.serialization.GameObjectSerialization;
 
 import java.util.ArrayList;
 import java.util.List;
