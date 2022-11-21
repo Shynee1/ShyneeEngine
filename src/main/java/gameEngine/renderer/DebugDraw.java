@@ -152,4 +152,16 @@ public class DebugDraw {
             else addLine2D(start, JMath.rotatePoint(center, vertices[0], rotation), color, lifetime);
         }
     }
+
+    public static void addCircle2D(Vector2f center, float radius, int lines, Vector3f color, int lifetime){
+        float rotation = (float) 360/lines;
+        Vector2f[] points = new Vector2f[lines+1];
+        points[0] = new Vector2f(center.x + radius, center.y);
+
+        for (int i = 1; i < points.length; i++){
+            points[i] = JMath.rotatePoint(center, points[i-1], rotation);
+
+            addLine2D(points[i-1], points[i], color, lifetime);
+        }
+    }
 }

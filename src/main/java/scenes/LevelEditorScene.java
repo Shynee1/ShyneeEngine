@@ -36,6 +36,8 @@ public class LevelEditorScene extends Scene {
         spritesheet = AssetPool.getSpritesheet("assets/spritesheets/blocks.png");
         this.camera = new Camera(new Vector2f(0, 0));
 
+        DebugDraw.addCircle2D(new Vector2f(100, 100), 100, 30, new Vector3f(1, 0, 0), 10000);
+
         if (levelLoaded){
             this.activeGameObject = gameObjects.get(0);
             return;
@@ -69,7 +71,7 @@ public class LevelEditorScene extends Scene {
     @Override
     public void update(float dt) {
 
-        DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(300, 100), rotation++, new Vector3f(1, 0, 0), 1);
+        //DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(300, 100), rotation++, new Vector3f(1, 0, 0), 1);
 
         levelEditorComponents.update(dt);
 
