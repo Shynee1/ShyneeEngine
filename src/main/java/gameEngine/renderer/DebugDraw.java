@@ -2,6 +2,7 @@ package gameEngine.renderer;
 
 import gameEngine.Window;
 import gameEngine.util.AssetPool;
+import gameEngine.util.JMath;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -128,5 +129,27 @@ public class DebugDraw {
 
     public static void addLine2D(Vector2f start, Vector2f end, Vector3f color, int lifetime){
         DebugDraw.lines.add(new Line2D(start, end, color, lifetime));
+    }
+
+
+    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation, Vector3f color, int lifetime){
+        Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f));
+        Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).mul(0.5f));
+
+        Vector2f[] vertices = {
+                new Vector2f(min.x, min.y),
+                new Vector2f(min.x, max.y),
+                new Vector2f(max.x, max.y),
+                new Vector2f(max.x, min.y)
+        };
+
+        for (int i = 0; i < vertices.length; i++){
+            Vector2f start = JMath.rotatePoint(center, vertices[i], rotation);
+
+            if (i != vertices.length-1) {
+                addLine2D(start, JMath.rotatePoint(center, vertices[i+1], rotation), color, lifetime);
+            }
+            else addLine2D(start, JMath.rotatePoint(center, vertices[0], rotation), color, lifetime);
+        }
     }
 }

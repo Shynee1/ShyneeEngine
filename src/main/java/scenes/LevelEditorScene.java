@@ -7,6 +7,7 @@ import gameEngine.components.GridLines;
 import gameEngine.components.MouseControls;
 import gameEngine.objects.Camera;
 import gameEngine.objects.GameObject;
+import gameEngine.renderer.DebugDraw;
 import gameEngine.sprites.Sprite;
 import gameEngine.sprites.Spritesheet;
 import gameEngine.util.AssetPool;
@@ -14,6 +15,7 @@ import gameEngine.util.Prefabs;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 public class LevelEditorScene extends Scene {
 
@@ -63,8 +65,12 @@ public class LevelEditorScene extends Scene {
         AssetPool.getTexture("assets/testImages/blendImage2.png");
     }
 
+    int rotation = 0;
     @Override
     public void update(float dt) {
+
+        DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(300, 100), rotation++, new Vector3f(1, 0, 0), 1);
+
         levelEditorComponents.update(dt);
 
         for (GameObject go : this.gameObjects) {
