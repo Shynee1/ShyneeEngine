@@ -4,7 +4,7 @@ A custom game engine and graphics renderer built using LWJGL(Open GL) and ImGui
 
 Features:
 - Robust Entity Component System (Scenes, GameObjects, Components)
-- Custom 2D graphics renderer (Texture batching, alpha blending, z-index, dirty flags)
+- Custom 2D graphics renderer (Texture batching, alpha blending, z-indexing, dirty flags)
 - Orthographic Game Camera (Projection/view matricies)
 - Real-time scene/variable editing through ImGui (Reflection)
 - Level load/save system through JSON
